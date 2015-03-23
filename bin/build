@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if [ "$#" -ne 2 ]; then
+	printf 'usage: %s file template\n' $0
+	exit 1
+fi
+
+title=`sed -n '/<h1>\(.*\)<\/h1>/s//\1/p' $1`
+
+m4 -P -DTITLE="$title" -DCONTENT=$1 $2
